@@ -1,0 +1,22 @@
+- name: Add repository key
+  apt_key: url=http://download.opensuse.org/repositories/shells:fish:release:2/Debian_8.0/Release.key
+  tags: fish-shell
+
+- name: Add repository
+  apt_repository: repo='{{ item }}' state=present  update_cache=yes
+  with_items:
+    - deb http://download.opensuse.org/repositories/shells:/fish:/release:/2/Debian_8.0/ /
+  tags: fish-shell
+
+- name: Install packages
+  apt: pkg={{ item }} state=present
+  with_items:
+  - fish
+  tags:
+  - fish-shell
+
+- name: Make default shell
+  shell: chsh -s /usr/bin/fish {{item}}
+  with_items: fish_shell_users
+  tags:
+   - fish-shell
