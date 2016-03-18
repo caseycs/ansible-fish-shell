@@ -7,14 +7,14 @@
   with_items:
     - deb http://download.opensuse.org/repositories/shells:/fish:/release:/2/Debian_8.0/ /
   tags: fish-shell
-  when: ansible_os_family == "Debian"
+  when: ansible_distribution == "Debian"
 
 - name: Add repository
   apt_repository: repo='{{ item }}' state=present  update_cache=yes
   with_items:
     - ppa:fish-shell/release-2
   tags: fish-shell
-  when: ansible_os_family == "Ubuntu"
+  when: ansible_distribution == "Ubuntu"
 
 - name: Install packages
   apt: pkg={{ item }} state=present
