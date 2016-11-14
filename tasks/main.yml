@@ -22,9 +22,3 @@
   - fish
   tags:
   - fish-shell
-
-- name: Make default shell
-  shell: chsh -s /usr/bin/fish {{item}}
-  with_items: fish_shell_users
-  tags:
-   - fish-shell
